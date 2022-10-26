@@ -1,0 +1,4 @@
+# node_modules is installed using the dependencies inside the container and should not be copied
+# when building it.
+node_modules
+

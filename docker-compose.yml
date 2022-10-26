@@ -4,17 +4,11 @@ services:
   nginx:
     image: nginx:stable
     volumes:
-      - ./dev/hosts:/etc/hosts
       - ./dev/etc/nginx/conf.d:/etc/nginx/conf.d
       - ./dev/etc/nginx/inc:/etc/nginx/inc
       - ./dev/etc/nginx/ssl:/etc/nginx/ssl
-      - ./frontend:/usr/share/nginx/html
     ports:
       - 80:80
-      - 443:443
-    environment:
-      TOMCAT_URL: http://tomcat:8080/backend/
-      KEYCLOAK_URL: http://keycloak:8080/auth/
 
   mariadb:
     image: mariadb:10.5
@@ -38,6 +32,14 @@ services:
       - ./target/StarterProject-1.0-SNAPSHOT:/usr/local/tomcat/webapps/backend
     ports:
       - 8080:8080
+
+  angular:
+    image: cloudstart-angular-frontend
+    build: ./frontend
+    volumes:
+      - ./frontend/src:/app/src
+    ports:
+      - 4200:4200
 
 volumes:
   mariadb:
