@@ -25,7 +25,7 @@ export class TodoService {
 
   addTodoItem(name: string, content?: string): void {
     this.http
-      .post<TodoItem>('/api/todo', { name, content })
+      .post<TodoItem>('/api/todo', { name, content, id: 0, done: false })
       .subscribe((newItem) => {
         this.todoStore.push(newItem);
         this.todoSubj.next(this.todoStore);

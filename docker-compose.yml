@@ -10,14 +10,15 @@ services:
     ports:
       - 80:80
       - 9090:80
+    restart: on-failure
 
   mariadb:
     image: mariadb:10.5
     command: --max_allowed_packet=32505856
     environment:
-      MARIADB_ROOT_PASSWORD: Root12+#
+      MARIADB_ROOT_PASSWORD: Root12
       MARIADB_USER: starterUser
-      MARIADB_PASSWORD: Demo12+#
+      MARIADB_PASSWORD: Demo12
       MARIADB_DATABASE: starterProject
       ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
@@ -26,17 +27,7 @@ services:
       - mariadb-boot:/opt/bitnami/mariadb/.bootstrap
     ports:
       - 3306:3306
-
-  tomcat:
-    image: tomcat:9
-    volumes:
-      - ./target/StarterProject-1.0-SNAPSHOT:/usr/local/tomcat/webapps/backend
-    ports:
-      - 8080:8080
-    environment:
-      - MYSQL_PASSWORD=Demo12+#
-      - MYSQL_URL=jdbc:mysql://mariadb:3306/starterProject
-      - MYSQL_USER=starterUser
+    restart: on-failure
 
   angular:
     image: cloudstart-angular-frontend
@@ -45,6 +36,14 @@ services:
       - ./frontend/src:/app/src
     ports:
       - 4200:4200
+
+  backend:
+    image: cloudstart-backend
+    build: ./backend
+    ports:
+      - 8000:8000
+    environment:
+      - DATABASE_URL=mysql://starterUser:Demo12@mariadb:3306/starterProject
 
 volumes:
   mariadb:
