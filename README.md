@@ -1,6 +1,4 @@
-# starterProject
-
-StarterProjekt für Praktikanten zum erlernen der grundlegenden Technik von Projekten des Cloud-Teams
+# DHBW Web-Engineering II Projektaufgabe
 
 ## Getting started
 
@@ -10,7 +8,7 @@ Ordnerstruktur/wichtige Files:
     - ./backup                  sql dumps
     - ./frontend                Frontend client
     - ./dev                     nginx (webserver) Konfiguration
-    - ./src                     Backend
+    - ./backend                 Rust Backend
     - ./src/main                Backend Logik, REST API und Entity-Klassen
     - ./src/resources           JPA-Konfiguration persistence.xml
     - ./src/webapp              Servlet Konfiguration web.xml
@@ -19,14 +17,13 @@ Ordnerstruktur/wichtige Files:
     - ./init.sh                 Script zum starten der Applikation
 
   
-1. Kotlin Projekt mit IntelliJ durch `Build > Build Artifacts > All Artifacts` oder `mvn package` kompilieren.
-2. `docker-compose up -d` ausführen
-3. Projekt ist unter http://localhost erreichbar
-4. Backend Beispiel ist unter http://localhost/api/hello/world erreichbar
-5. Logs anzeigen mit `docker-compose logs -f`
+1. `docker-compose up -d` bzw. `init.sh` ausführen
+2. Projekt ist unter http://localhost oder http://localhost:9090 erreichbar
+3. Backend Beispiel ist unter http://localhost/api/ erreichbar
+4. Logs anzeigen mit `docker-compose logs -f`
 
-- Bei Änderungen im Backend, dies neu bauen und `docker-compose restart` ausführen
-- Änderungen im Frontend werden automatisch neugebaut. Wenn die Abhängigkeiten des Frontends geändert wurden muss mit `docker-compose build` der Frontend Container neugebaut werden
+- Bei Änderungen im Backend, dies neu bauen mit `docker-compose build backend` und `docker-compose restart` ausführen
+- Änderungen im Frontend werden automatisch neugebaut. Wenn die Abhängigkeiten des Frontends geändert wurden muss mit `docker-compose build frontend` der Frontend Container neugebaut werden
 
 ## Aufgaben
 
