@@ -5,15 +5,19 @@ import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
+
 @Path("/todo")
 class TodoAPI {
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     fun getTodo(@PathParam("id") id: String): TodoEntity {
         val state = ThreadState.begin()
-        return state.em.find(TodoEntity::class.java, id) ?: throw WebApplicationException(Response.Status.NOT_FOUND)
+        val query = state.em.createQuery(
+            "SELECT e FROM TodoEntity e WHERE e.id = ?1", TodoEntity::class.java
+        )
+        return query.setParameter(1, id.toLong()).singleResult;
     }
 
     @POST
@@ -36,30 +40,29 @@ class TodoAPI {
     }
 
     @DELETE
-    @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    fun deleteTodoById(@PathParam("id") id: String): TodoEntity {
+    @Path("/{id}")
+    fun deleteTodoById(@PathParam("id") id: String): String {
         val state = ThreadState.begin()
-        val todoEntity =
-            state.em.find(TodoEntity::class.java, id) ?: throw WebApplicationException(Response.Status.NOT_FOUND)
-        state.em.remove(todoEntity)
-        return todoEntity
+        val query = state.em.createQuery("DELETE FROM TodoEntity t WHERE t.id = ?1")
+        query.setParameter(1, id.toLong()).executeUpdate()
+        return "ok"
     }
 
     @PUT
-    @Path("{id}")
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     fun updateTodoById(@PathParam("id") id: String, newTodo: TodoEntity): TodoEntity {
         val state = ThreadState.begin()
-        val dbTodo =
-            state.em.find(TodoEntity::class.java, id) ?: throw WebApplicationException(Response.Status.NOT_FOUND)
+        val dbTodo = getTodo(id)
 
         dbTodo.content = newTodo.content
         dbTodo.done = newTodo.done
         dbTodo.done = newTodo.done
 
+        state.em.transaction.begin()
         state.em.merge(dbTodo)
+        state.em.transaction.commit()
         return dbTodo
     }
 }

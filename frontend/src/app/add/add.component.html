@@ -1,0 +1,21 @@
+<div>
+
+    <form class="addToDo" [formGroup]="todoForm" (ngSubmit)="addTodo()">
+
+      <mat-form-field class="input-name" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="todoName" name="todoName">
+      </mat-form-field>
+
+      <mat-form-field class="input-content" appearance="fill">
+        <mat-label>Content</mat-label>
+        <textarea matInput type="text" formControlName="todoContent" name="todoContent" placeholder="Content..."></textarea>
+      </mat-form-field>
+
+      <button mat-fab color="primary" aria-label="icon button with an add icon" type="submit">
+        <mat-icon>add</mat-icon>
+      </button>       
+      
+    </form>  
+      
+  </div>

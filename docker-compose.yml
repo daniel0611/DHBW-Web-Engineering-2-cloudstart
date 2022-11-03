@@ -9,6 +9,7 @@ services:
       - ./dev/etc/nginx/ssl:/etc/nginx/ssl
     ports:
       - 80:80
+      - 9090:80
 
   mariadb:
     image: mariadb:10.5
