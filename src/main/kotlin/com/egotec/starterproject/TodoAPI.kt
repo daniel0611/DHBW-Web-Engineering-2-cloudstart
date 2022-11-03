@@ -22,7 +22,7 @@ class TodoAPI {
     fun createTodo(todoEntity: TodoEntity): TodoEntity {
         val state = ThreadState.begin()
         state.em.transaction.begin()
-        state.em.merge(todoEntity)
+        state.em.persist(todoEntity)
         state.em.transaction.commit()
         return todoEntity
     }
