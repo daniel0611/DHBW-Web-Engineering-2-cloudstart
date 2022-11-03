@@ -32,6 +32,10 @@ services:
       - ./target/StarterProject-1.0-SNAPSHOT:/usr/local/tomcat/webapps/backend
     ports:
       - 8080:8080
+    environment:
+      - MYSQL_PASSWORD=Demo12+#
+      - MYSQL_URL=jdbc:mysql://mariadb:3306/starterProject
+      - MYSQL_USER=starterUser
 
   angular:
     image: cloudstart-angular-frontend
