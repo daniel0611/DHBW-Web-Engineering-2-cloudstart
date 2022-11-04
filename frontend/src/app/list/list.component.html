@@ -6,7 +6,7 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="component">
-        <mat-checkbox color="primary"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="todo.done" (input)="updateTodo(todo)" color="primary"></mat-checkbox>
         </div>
       <div class="component">
       <button style="width: 100%;" mat-button color="primary" (click)="deleteItem(todo)"><mat-icon>delete</mat-icon></button>

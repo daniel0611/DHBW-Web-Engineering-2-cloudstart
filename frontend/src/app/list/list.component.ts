@@ -22,8 +22,8 @@ export class ListComponent implements OnInit {
     this.todoService.deleteTodoItem(item);
   }
 
-  toggleCompleted(item: TodoItem): void {
-    this.todoService.setDoneState(item, !item.done);
+  updateTodo(item: TodoItem): void {
+    this.todoService.updateTodoItem(item);
   }
 }
 

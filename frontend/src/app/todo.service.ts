@@ -39,9 +39,10 @@ export class TodoService {
     });
   }
 
-  setDoneState(item: TodoItem, done: boolean): void {
-    const index = this.todoStore.findIndex((i) => i.id === item.id);
-    this.todoStore[index].done = done;
-    this.todoSubj.next(this.todoStore);
+  updateTodoItem(item: TodoItem): void {
+    this.http.put(`/api/todo/${item.id}`, item).subscribe(() => {
+      this.todoStore = this.todoStore.map((i) => (i.id === item.id ? item : i));
+      this.todoSubj.next(this.todoStore);
+    });
   }
 }
