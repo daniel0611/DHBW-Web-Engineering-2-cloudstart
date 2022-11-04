@@ -1,9 +1,17 @@
 .card {
-    max-width: 400px;
-    margin: 20px auto;
-  }
+  max-width: 600px;
+  margin: 20px auto;
+}
 
 .component {
-    background-color: #f1f1f1;
-    margin: 5px auto;
-  }
+  background-color: #f1f1f1;
+  margin: 5px auto;
+  width: 50%;
+}
+
+.checkbox {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
