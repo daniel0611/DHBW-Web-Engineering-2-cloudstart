@@ -19,7 +19,7 @@ services:
       MARIADB_ROOT_PASSWORD: Root12
       MARIADB_USER: starterUser
       MARIADB_PASSWORD: Demo12
-      MARIADB_DATABASE: starterProject
+      MARIADB_DATABASE: todo
       ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - ./backup/mariadb.sql:/docker-entrypoint-initdb.d/mariadb.sql
@@ -30,7 +30,7 @@ services:
     restart: on-failure
 
   angular:
-    image: cloudstart-angular-frontend
+    image: todo-angular-frontend
     build: ./frontend
     volumes:
       - ./frontend/src:/app/src
@@ -38,12 +38,12 @@ services:
       - 4200:4200
 
   backend:
-    image: cloudstart-backend
+    image: todo-backend
     build: ./backend
     ports:
       - 8000:8000
     environment:
-      - DATABASE_URL=mysql://starterUser:Demo12@mariadb:3306/starterProject
+      - DATABASE_URL=mysql://starterUser:Demo12@mariadb:3306/todo
 
 volumes:
   mariadb:
