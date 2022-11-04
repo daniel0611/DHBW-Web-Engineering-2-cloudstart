@@ -27,9 +27,9 @@ export class AddComponent implements OnInit {
   }
 
   addTodo(): void {
-    if (this.todoForm.value.todoContent?.length === 0 || this.todoForm.value.todoName?.length === 0) {
-      alert('Please fill in all fields');
-      return;
+    if (this.todoForm.value.todoName?.length === 0) {
+      alert('Bitte ein Namen Bitte ein Namen für das TODO eingeben');
+	  return;
     }
 
     this.todoService.addTodoItem(this.todoForm.value.todoName ?? '', this.todoForm.value.todoContent ?? '');
