@@ -1,6 +1,10 @@
-mod entity;
-mod pool;
+#[macro_use]
+extern crate rocket;
 
+mod db;
+mod entity;
+
+use db::Db;
 use dotenvy::dotenv;
 use entity::prelude::*;
 use entity::todo;
@@ -11,11 +15,6 @@ use sea_orm::ActiveModelTrait;
 use sea_orm::EntityTrait;
 use sea_orm::Set;
 use sea_orm_rocket::Database;
-
-use crate::pool::Db;
-
-#[macro_use]
-extern crate rocket;
 
 #[get("/")]
 fn index() -> &'static str {
@@ -102,19 +101,19 @@ async fn delete_todo_by_id(id: i32, db: &Db) -> Status {
 
 #[launch]
 async fn rocket() -> _ {
-    dotenv().ok();
+    dotenv().ok(); // load DATABASE_URL from .env file, if it exists
 
-    let rocket = rocket::build();
-
-    rocket.attach(Db::init()).mount(
-        "/",
-        routes![
-            index,
-            get_all_todos,
-            get_todo_by_id,
-            create_todo,
-            update_todo,
-            delete_todo_by_id
-        ],
-    )
+    rocket::build()
+        .attach(Db::init()) // dependency-inject database connection pool
+        .mount(
+            "/",
+            routes![
+                index,
+                get_all_todos,
+                get_todo_by_id,
+                create_todo,
+                update_todo,
+                delete_todo_by_id
+            ],
+        )
 }

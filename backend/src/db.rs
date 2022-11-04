@@ -3,6 +3,8 @@ use migration::{Migrator, MigratorTrait};
 use sea_orm_rocket::{rocket::figment::Figment, Database};
 use std::env;
 
+/// Connection pooled database connection for SeaORM that can be used in Rocket
+
 #[derive(Database, Debug)]
 #[database("sea_orm")]
 pub struct Db(SeaOrmPool);
