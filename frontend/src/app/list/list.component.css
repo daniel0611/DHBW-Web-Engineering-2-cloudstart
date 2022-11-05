@@ -1,17 +1,43 @@
 .card {
   max-width: 600px;
-  margin: 20px auto;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+.card-header{
+  padding: 5px 15px 5px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
 }
 
 .component {
-  background-color: #f1f1f1;
+  display: inline-block;
+  width: 10%;
   margin: 5px auto;
-  width: 50%;
+  border-radius: 30px;
 }
 
 .checkbox {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
+  float: left;
+  height: auto;
+  vertical-align: center;
+}
+
+.delete{
+  float: right;
+  vertical-align: center;
+}
+
+.title{
+  display: inline-block;
+  width: 75%;
+  margin: auto 2.5% auto 2.5%;
+}
+.innerTitle{
+  display: table;
+  vertical-align: middle;
+}
+.centerTitle{
+  display: table;
+  text-align: center;
 }
