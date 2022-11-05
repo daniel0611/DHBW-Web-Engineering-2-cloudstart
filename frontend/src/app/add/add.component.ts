@@ -28,10 +28,12 @@ export class AddComponent implements OnInit {
 
   addTodo(): void {
     if (this.todoForm.value.todoName?.length === 0) {
-      alert('Bitte ein Namen Bitte ein Namen für das TODO eingeben');
-	  return;
+      return;
     }
 
-    this.todoService.addTodoItem(this.todoForm.value.todoName ?? '', this.todoForm.value.todoContent ?? '');
+    this.todoService.addTodoItem(
+      this.todoForm.value.todoName ?? '',
+      this.todoForm.value.todoContent ?? ''
+    );
   }
 }

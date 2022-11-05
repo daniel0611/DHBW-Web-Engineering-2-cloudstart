@@ -11,7 +11,7 @@
   border-radius: 5px;
 }
 
-button {
+.buttons {
   margin-left: auto;
   margin-right: 0;
   margin-top: -6px;
@@ -35,4 +35,19 @@ mat-card-content.component {
 .done {
   text-decoration: line-through;
   color: #555;
+}
+
+mat-form-field.name-input {
+  width: 420px;
+  padding: 0;
+  margin-top: -0.75em;
+  margin-bottom: -1.25em;
+}
+
+mat-form-field.content-input {
+  width: 100%;
+}
+
+mat-form-field.content-input textarea {
+  min-height: 800px;
 }

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ApplicationRef, Component, Inject, OnInit } from '@angular/core';
 import { TodoItem } from '../todo';
 import { TodoService } from '../todo.service';
 import {
@@ -14,6 +14,7 @@ import {
 })
 export class ListComponent implements OnInit {
   todoItems: TodoItem[] = [];
+  editingItem?: TodoItem = undefined;
 
   constructor(private todoService: TodoService, private dialog: MatDialog) {}
 
@@ -38,6 +39,26 @@ export class ListComponent implements OnInit {
 
   updateTodo(item: TodoItem): void {
     this.todoService.updateTodoItem(item);
+  }
+
+  startEdit(item: TodoItem): void {
+    // Creates a shallow copy.
+    // All changes will be made on this copy and not in the original item.
+    // If the changes are saved to the serve the array will be updated
+    // through the observable.
+    // If the changes are discarded the original item will be displayed from the array.
+    this.editingItem = { ...item };
+  }
+
+  finishEdit(): void {
+    if (!this.editingItem) return;
+
+    this.todoService.updateTodoItem(this.editingItem);
+    this.editingItem = undefined;
+  }
+
+  cancelEdit(): void {
+    this.editingItem = undefined;
   }
 }
 

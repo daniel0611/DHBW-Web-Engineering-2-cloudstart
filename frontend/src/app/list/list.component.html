@@ -2,12 +2,35 @@
   <div class="component">
     <mat-checkbox [(ngModel)]="todo.done" (input)="updateTodo(todo)" color="primary"> </mat-checkbox>
 
-    <mat-card-title>{{ todo.name }}</mat-card-title>
+    <div>
+      <mat-card-title *ngIf="editingItem?.id !== todo.id">{{ todo.name }}</mat-card-title>
+      <mat-form-field *ngIf="editingItem && editingItem?.id === todo.id" class="name-input" >
+        <input matInput maxlength="100" type="text" [(ngModel)]="editingItem.name">
+      </mat-form-field>
+    </div>
 
-    <button mat-button color="primary" (click)="deleteItem(todo)">
-      <mat-icon>delete</mat-icon>
-    </button>
+    <div class="buttons">
+      <button *ngIf="editingItem?.id !== todo.id" mat-icon-button color="primary" (click)="startEdit(todo)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="editingItem?.id === todo.id" mat-icon-button color="primary" (click)="cancelEdit()">
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <button *ngIf="editingItem?.id === todo.id" mat-icon-button color="primary" (click)="finishEdit()">
+        <mat-icon>save</mat-icon>
+      </button>
+
+      <button mat-icon-button color="primary" (click)="deleteItem(todo)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
 
-  <mat-card-content class="component">{{ todo.content }}</mat-card-content>
+  <mat-card-content *ngIf="todo.content || editingItem?.id === todo.id" class="component">
+    <div *ngIf="editingItem?.id !== todo.id" [innerText]="todo.content"></div>
+
+    <mat-form-field *ngIf="editingItem && editingItem?.id === todo.id" class="content-input">
+      <textarea matInput maxlength="1000" type="text" [(ngModel)]="editingItem.content"></textarea>
+    </mat-form-field>
+  </mat-card-content>
 </mat-card>
