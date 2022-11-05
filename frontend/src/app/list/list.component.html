@@ -1,27 +1,13 @@
+<mat-card [class.done]="todo.done" class="card" *ngFor="let todo of todoItems">
+  <div class="component">
+    <mat-checkbox [(ngModel)]="todo.done" (input)="updateTodo(todo)" color="primary"> </mat-checkbox>
 
-<div>
-  <mat-card class="card" *ngFor="let todo of todoItems">
+    <mat-card-title>{{ todo.name }}</mat-card-title>
 
-    <div class="card-header">
-    <mat-card-actions class="component">
-        <mat-checkbox class="checkbox" [(ngModel)]="todo.done" (input)="updateTodo(todo)" color="primary" style>Done</mat-checkbox>
-    </mat-card-actions>
+    <button mat-button color="primary" (click)="deleteItem(todo)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
 
-      <div class="title">
-        <div class="innerTitle">
-        <mat-card-title><span class="centerTitle">{{ todo.name }}</span></mat-card-title>
-          </div>
-      </div>
-
-    <mat-card-actions class="component">
-        <button class="delete" style="width: 100%;" mat-button color="primary" (click)="deleteItem(todo)">
-          <mat-icon>delete</mat-icon>
-        </button>
-    </mat-card-actions>
-
-    </div>
-    <mat-card-content>{{ todo.content }}</mat-card-content>
-
-
-  </mat-card>
-</div>
+  <mat-card-content class="component">{{ todo.content }}</mat-card-content>
+</mat-card>
