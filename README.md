@@ -32,3 +32,11 @@ Ordnerstruktur/wichtige Files:
 
 - Bei Änderungen im Backend, dies neu bauen mit `docker-compose build backend` und `docker-compose restart` ausführen
 - Änderungen im Frontend werden automatisch neugebaut. Wenn die Abhängigkeiten des Frontends geändert wurden muss mit `docker-compose build frontend` der Frontend Container neugebaut werden
+
+## Students
+
+| GitHub username | Matrikelnummer |
+|-----------------|----------------|
+| @daniel0611     | 6424019        |
+| @Juli-47        | 3083733        |
+| @1Adri1         | 3344271        |
